@@ -27,6 +27,8 @@ MCP-compatible agents and clients can discover and call them.
 
 import ast
 import operator
+from pathlib import Path
+from fastmcp.server.providers.skills import SkillsDirectoryProvider
 
 from fastmcp import FastMCP
 
@@ -34,6 +36,11 @@ from fastmcp import FastMCP
 # Create the MCP server
 mcp = FastMCP("Sadeem Agent Utilities")
 
+SKILLS_DIR = Path(__file__).resolve().parent.parent / "skills"
+
+mcp.add_provider(
+    SkillsDirectoryProvider(roots=SKILLS_DIR)
+)
 
 # Arithmetic operations allowed by the calculator
 SUPPORTED_OPERATIONS = {
